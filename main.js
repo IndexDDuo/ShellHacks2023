@@ -27,75 +27,75 @@ app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 
 
-app.get("/@wanted", async (req, res) => {
-    // Define query parameters based on the request
-    const pageSize = req.query.pageSize || 20;
-    const page = req.query.page || 1;
-    const sortOn = req.query.sort_on || 'modified';
-    const sortOrder = req.query.sort_order || 'desc';
-    const title = req.query.title || '';
-    const fieldOffices = req.query.field_offices || '';
-    const personClassification = req.query.person_classification || '';
-    const posterClassification = req.query.poster_classification || 'default';
-    const status = req.query.status || '';
+// app.get("/@wanted", async (req, res) => {
+//     // Define query parameters based on the request
+//     const pageSize = req.query.pageSize || 20;
+//     const page = req.query.page || 1;
+//     const sortOn = req.query.sort_on || 'modified';
+//     const sortOrder = req.query.sort_order || 'desc';
+//     const title = req.query.title || '';
+//     const fieldOffices = req.query.field_offices || '';
+//     const personClassification = req.query.person_classification || '';
+//     const posterClassification = req.query.poster_classification || 'default';
+//     const status = req.query.status || '';
   
-    // Construct the URL with query parameters
-    const apiUrl = `https://api.fbi.gov/wanted/v1/list?pageSize=${pageSize}&page=${page}&sort_on=${sortOn}&sort_order=${sortOrder}&title=${title}&field_offices=${fieldOffices}&person_classification=${personClassification}&poster_classification=${posterClassification}&status=${status}`;
+//     // Construct the URL with query parameters
+//     const apiUrl = `https://api.fbi.gov/wanted/v1/list?pageSize=${pageSize}&page=${page}&sort_on=${sortOn}&sort_order=${sortOrder}&title=${title}&field_offices=${fieldOffices}&person_classification=${personClassification}&poster_classification=${posterClassification}&status=${status}`;
   
-    try {
-      const fetchData = await fetch(apiUrl, {
-        headers: {
-          'User-Agent': 'Your User Agent String', // Replace with your actual User-Agent
-        },
-      });
+//     try {
+//       const fetchData = await fetch(apiUrl, {
+//         headers: {
+//           'User-Agent': 'Your User Agent String', // Replace with your actual User-Agent
+//         },
+//       });
   
-      if (fetchData.ok) {
-        const gData = await fetchData.json();
-        res.json(gData);
-      } else {
-        console.error(`Error fetching data: ${fetchData.status} - ${fetchData.statusText}`);
-        res.status(fetchData.status).json({ error: 'Failed to fetch data' });
-      }
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  });
+//       if (fetchData.ok) {
+//         const gData = await fetchData.json();
+//         res.json(gData);
+//       } else {
+//         console.error(`Error fetching data: ${fetchData.status} - ${fetchData.statusText}`);
+//         res.status(fetchData.status).json({ error: 'Failed to fetch data' });
+//       }
+//     } catch (err) {
+//       console.error(err);
+//       res.status(500).json({ error: 'Internal server error' });
+//     }
+//   });
   
 
-  app.get("/@wanted/field_offices/:field_offices", async (req, res) => {
-    // Extract the field_offices parameter from the URL
-    const fieldOffices = req.params.field_offices;
+//   app.get("/@wanted/field_offices/:field_offices", async (req, res) => {
+//     // Extract the field_offices parameter from the URL
+//     const fieldOffices = req.params.field_offices;
   
-    // Construct the FBI API URL with the specified parameters
-    const apiUrl = `https://api.fbi.gov/@wanted?pageSize=20&page=1&sort_on=modified&sort_order=desc&field_offices=${fieldOffices}`;
+//     // Construct the FBI API URL with the specified parameters
+//     const apiUrl = `https://api.fbi.gov/@wanted?pageSize=20&page=1&sort_on=modified&sort_order=desc&field_offices=${fieldOffices}`;
   
-    try {
-      const fetchData = await fetch(apiUrl, {
-        headers: {
-          'User-Agent': 'Your User Agent String', // Replace with your actual User-Agent
-        },
-      });
+//     try {
+//       const fetchData = await fetch(apiUrl, {
+//         headers: {
+//           'User-Agent': 'Your User Agent String', // Replace with your actual User-Agent
+//         },
+//       });
   
-      if (fetchData.ok) {
-        const gData = await fetchData.json();
+//       if (fetchData.ok) {
+//         const gData = await fetchData.json();
   
-        // Extract and format the names and URLs of wanted persons
-        const wantedPersons = gData.items.map((item) => ({
-          name: item.title,
-          url: item.url,
-        }));
+//         // Extract and format the names and URLs of wanted persons
+//         const wantedPersons = gData.items.map((item) => ({
+//           name: item.title,
+//           url: item.url,
+//         }));
         
-        res.json(wantedPersons);
-      } else {
-        console.error(`Error fetching data: ${fetchData.status} - ${fetchData.statusText}`);
-        res.status(fetchData.status).json({ error: 'Failed to fetch data' });
-      }
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  });
+//         res.json(wantedPersons);
+//       } else {
+//         console.error(`Error fetching data: ${fetchData.status} - ${fetchData.statusText}`);
+//         res.status(fetchData.status).json({ error: 'Failed to fetch data' });
+//       }
+//     } catch (err) {
+//       console.error(err);
+//       res.status(500).json({ error: 'Internal server error' });
+//     }
+//   });
   
 
   app.route('/search')
@@ -106,7 +106,9 @@ app.get("/@wanted", async (req, res) => {
   .post(async (req, res) => {
     const title = req.body.title;
     const fieldOffices = req.body.fieldOffices;
+    // const race = req.body.race;
     const race = req.body.race;
+    // console.log("Form Data right after:", race);
     const rewardMin = req.body.rewardMin;
     const rewardMax = req.body.rewardMax;
     const weight = req.body.weight;
@@ -117,7 +119,7 @@ app.get("/@wanted", async (req, res) => {
     const apiUrl = `https://api.fbi.gov/@wanted?pageSize=20&page=1&sort_on=modified&sort_order=desc&title=${title}&field_offices=${fieldOffices}&reward_min=${rewardMin}&reward_max=${rewardMax}&weight=${weight}&age_min=${age}&age_max=${age}&race=${race}`;
 
     console.log("Constructed API URL:", apiUrl);
-    console.log("Form Data:", req.body); // Log the form data
+    console.log("Form Data2:", req.body.race); // Log the form data
 
     try {
       // Fetch data from the FBI API
