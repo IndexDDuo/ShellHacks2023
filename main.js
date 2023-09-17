@@ -12,8 +12,10 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = 3000;
+app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
+app.use(bodyParser.json()); // Parse JSON bodies
 
-const basket = "https://api.fbi.gov/wanted/v1/list/";
+// const basket = "https://api.fbi.gov/wanted/v1/list/";
 
 app.listen(PORT, () => {
   console.log(`The server is running on port ${PORT}.`);
@@ -104,13 +106,18 @@ app.get("/@wanted", async (req, res) => {
   .post(async (req, res) => {
     const title = req.body.title;
     const fieldOffices = req.body.fieldOffices;
+    const race = req.body.race;
     const rewardMin = req.body.rewardMin;
     const rewardMax = req.body.rewardMax;
     const weight = req.body.weight;
     const age = req.body.age;
+    console.log("Form Data:", req.body.title);
 
     // Construct the FBI API URL with the specified search parameters
-    const apiUrl = `https://api.fbi.gov/@wanted?pageSize=20&page=1&sort_on=modified&sort_order=desc&title=${title}&field_offices=${fieldOffices}&reward_min=${rewardMin}&reward_max=${rewardMax}&weight=${weight}&age_min=${age}&age_max=${age}`;
+    const apiUrl = `https://api.fbi.gov/@wanted?pageSize=20&page=1&sort_on=modified&sort_order=desc&title=${title}&field_offices=${fieldOffices}&reward_min=${rewardMin}&reward_max=${rewardMax}&weight=${weight}&age_min=${age}&age_max=${age}&race=${race}`;
+
+    console.log("Constructed API URL:", apiUrl);
+    console.log("Form Data:", req.body); // Log the form data
 
     try {
       // Fetch data from the FBI API
@@ -122,13 +129,15 @@ app.get("/@wanted", async (req, res) => {
 
       if (fetchData.ok) {
         const gData = await fetchData.json();
-        console.log('Search Results:', gData);
 
+        // if (gData) {
+        //   console.log(gData.items);
+        // }
 
         // Check if there are search results to render
         if (gData && gData.items && gData.items.length > 0) {
-          // Redirect to the /result page with search results
-          res.redirect('/result');
+          // Render the results page with search results data
+          res.render('search-results', { results: gData.items });
         } else {
           // No search results found
           res.status(404).send('No search results found.');
@@ -142,3 +151,4 @@ app.get("/@wanted", async (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     }
   });
+
