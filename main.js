@@ -98,25 +98,26 @@ app.set('view engine', 'ejs');
 //   });
   
 
-  app.route('/search')
+app.route('/search')
   .get((req, res) => {
     // Render the search form
     res.sendFile(path.join(__dirname, 'index.html'));
   })
   .post(async (req, res) => {
     const title = req.body.title;
-    const fieldOffices = req.body.fieldOffices;
+    let fieldOffices = req.body.fieldOffices; // Store it in a variable
+    fieldOffices = fieldOffices.toLowerCase().replace(/\s/g, ''); // Update the variable
     // const race = req.body.race;
     const race = req.body.race;
     // console.log("Form Data right after:", race);
-    const rewardMin = req.body.rewardMin;
-    const rewardMax = req.body.rewardMax;
+    // const rewardMin = req.body.rewardMin;
+    // const rewardMax = req.body.rewardMax;
     const weight = req.body.weight;
     const age = req.body.age;
-    console.log("Form Data:", req.body.title);
+    console.log("Form Data city:", fieldOffices); // Use the updated variable
 
     // Construct the FBI API URL with the specified search parameters
-    const apiUrl = `https://api.fbi.gov/@wanted?pageSize=20&page=1&sort_on=modified&sort_order=desc&title=${title}&field_offices=${fieldOffices}&reward_min=${rewardMin}&reward_max=${rewardMax}&weight=${weight}&age_min=${age}&age_max=${age}&race=${race}`;
+    const apiUrl = `https://api.fbi.gov/@wanted?pageSize=20&page=1&sort_on=modified&sort_order=desc&title=${title}&field_offices=${fieldOffices}&weight=${weight}&age_min=${age}&age_max=${age}&race=${race}`;
 
     console.log("Constructed API URL:", apiUrl);
     console.log("Form Data2:", req.body.race); // Log the form data

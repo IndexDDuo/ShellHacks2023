@@ -2,39 +2,89 @@
 <html>
 <head>
     <title>FBI Most Wanted Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        select {
+            height: 40px;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
     <h1>FBI Most Wanted Search</h1>
     <form action="/search" method="post">
-      <label for="title">Title (Name):</label>
-      <input type="text" id="title" name="title"><br><br>
-  
-      <label for="fieldOffices">Field Offices (Location - City):</label>
-      <input type="text" id="fieldOffices" name="fieldOffices"><br><br>
-      
-      <label for="race">Race:</label>
-      <!-- <input type="text" id="race" name="race"><br><br> -->
-      <select name="race" id="race">
-        <option value="white">White</option>
-        <option value="black">Black</option>
-        <option value="hispanic">Hispanic</option>
-        <option value="asian">Asian</option>
-      </select><br><br>
+        <label for="title">Title (Name):</label>
+        <input type="text" id="title" name="title">
 
-      <label for="rewardMin">Reward Min:</label>
-      <input type="number" id="rewardMin" name="rewardMin"><br><br>
-  
-      <label for="rewardMax">Reward Max:</label>
-      <input type="number" id="rewardMax" name="rewardMax"><br><br>
-  
-      <label for="weight">Weight:</label>
-      <input type="number" id="weight" name="weight"><br><br>
-  
-      <label for="age">Age:</label>
-      <input type="number" id="age" name="age"><br><br>
-  
-      <input type="submit" value="Search">
-  </form>
-  
+        <label for="fieldOffices">Field Offices (Location - City):</label>
+        <input type="text" id="fieldOffices" name="fieldOffices">
+        
+        <label for="race">Race:</label>
+        <select name="race" id="race">
+            <option value=""> -- select an option -- </option>
+            <option value="white">White</option>
+            <option value="black">Black</option>
+            <option value="hispanic">Hispanic</option>
+            <option value="asian">Asian</option>
+        </select>
+
+        <label for="weight">Weight:</label>
+        <input type="number" id="weight" name="weight">
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age">
+
+        <input type="submit" value="Search">
+    </form>
 </body>
 </html>

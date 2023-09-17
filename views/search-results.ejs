@@ -2,19 +2,71 @@
 <html>
 <head>
     <title>FBI Most Wanted Search Results</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        .img-small {
+            max-width: 100px;
+            display: block; /* Make the image a block element for centering */
+            margin: 0 auto; /* Center the image horizontally */
+        }
+
+        /* Define the grid container */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Four columns */
+            grid-gap: 20px; /* Gap between items */
+            padding: 20px;
+        }
+
+        /* Style each grid item */
+        .grid-item {
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center; /* Center the text */
+        }
+
+        .grid-item a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .grid-item p {
+            margin-top: 10px;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
     <h1>FBI Most Wanted Search Results</h1>
-    <ul>
+    <div class="grid-container">
         <% if (results && results.length > 0) { %>
             <% results.forEach((result) => { %>
-                <li>
+                <div class="grid-item">
+                    <img src="<%= result.images[0].original %>" class="img-small">
                     <a href="<%= result.url %>"><%= result.title %></a>
-                </li>
+                    <p><%= result.description %></p>
+                </div>
             <% }); %>
         <% } else { %>
-            <li>No search results found.</li>
+            <div>No search results found.</div>
         <% } %>
-    </ul>
+    </div>
 </body>
 </html>
