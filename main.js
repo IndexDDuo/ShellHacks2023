@@ -107,11 +107,7 @@ app.route('/search')
     const title = req.body.title;
     let fieldOffices = req.body.fieldOffices; // Store it in a variable
     fieldOffices = fieldOffices.toLowerCase().replace(/\s/g, ''); // Update the variable
-    // const race = req.body.race;
     const race = req.body.race;
-    // console.log("Form Data right after:", race);
-    // const rewardMin = req.body.rewardMin;
-    // const rewardMax = req.body.rewardMax;
     const weight = req.body.weight;
     const age = req.body.age;
     console.log("Form Data city:", fieldOffices); // Use the updated variable
