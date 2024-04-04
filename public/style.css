@@ -48,7 +48,7 @@ select {
     cursor: pointer;
 }
 
-input[type="submit"] {
+button {
     width: 100%; /* Makes the button full width */
     background-color: #007bff;
     color: #fff;
@@ -60,7 +60,7 @@ input[type="submit"] {
     border-radius: 4px;
 }
 
-input[type="submit"]:hover {
+button:hover {
     background-color: #0056b3;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Slight elevation on hover */
 }

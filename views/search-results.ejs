@@ -4,53 +4,63 @@
     <!-- <link rel="stylesheet" type="text/css" href="/public/search-style.css"> -->
     <title>FBI Most Wanted Search Results</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
+       body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
 
-        h1 {
-            text-align: center;
-            background-color: #007bff;
-            color: #fff;
-            padding: 20px;
-            margin: 0;
-        }
+h1 {
+    text-align: center;
+    background-color: #007bff;
+    color: #fff;
+    padding: 30px 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-        .img-small {
-            max-width: 100px;
-            display: block; /* Make the image a block element for centering */
-            margin: 0 auto; /* Center the image horizontally */
-        }
+.img-small {
+    max-width: 100px;
+    display: block;
+    margin: 20px auto; /* Adjusted for better spacing */
+}
 
-        /* Define the grid container */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Four columns */
-            grid-gap: 20px; /* Gap between items */
-            padding: 20px;
-        }
+/* Retaining the original grid layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Original four columns */
+    grid-gap: 20px; /* Gap between items */
+    padding: 20px;
+}
 
-        /* Style each grid item */
-        .grid-item {
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            text-align: center; /* Center the text */
-        }
+/* Enhancing the grid item while keeping the border style */
+.grid-item {
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd; /* Adding a solid border for definition */
+}
 
-        .grid-item a {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
+.grid-item a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
 
-        .grid-item p {
-            margin-top: 10px;
-            color: #555;
-        }
+.grid-item p {
+    margin-top: 10px;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .grid-container {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Responsive adjustment */
+    }
+}
+
     </style>
 </head>
 <body>
