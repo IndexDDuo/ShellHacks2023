@@ -7,6 +7,8 @@ import fetch from 'node-fetch';
 export default async function(req, res) {
 
     console.log(req.body);
+    console.log(req.headers);
+
 
     if (!req.body) {
         return res.status(400).json({ error: 'Request body is missing' });
