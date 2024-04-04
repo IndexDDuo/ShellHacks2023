@@ -1,55 +1,83 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f7f7f7;
     margin: 0;
-    padding: 0;
+    padding: 20px;
+    color: #333;
 }
 
 h1 {
     text-align: center;
-    background-color: #007bff;
+    background-color: #0056b3;
     color: #fff;
-    padding: 20px;
-    margin: 0;
+    padding: 30px 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
 }
 
 form {
     max-width: 600px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px;
     background-color: #fff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
 }
 
 label {
     display: block;
-    font-weight: bold;
-    margin-bottom: 10px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #0056b3;
 }
 
 input[type="text"],
 select,
 input[type="number"] {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
+    padding: 12px;
+    margin-bottom: 25px;
+    border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box; /* Added for better box sizing */
 }
 
 select {
-    height: 40px;
+    height: 45px;
+    cursor: pointer;
 }
 
 input[type="submit"] {
+    width: 100%; /* Makes the button full width */
     background-color: #007bff;
     color: #fff;
     border: none;
-    padding: 10px 20px;
-    font-weight: bold;
+    padding: 12px;
+    font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    border-radius: 4px;
 }
 
 input[type="submit"]:hover {
     background-color: #0056b3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Slight elevation on hover */
+}
+
+/* Add some padding to the body */
+body {
+    padding-bottom: 40px;
+}
+
+/* Style adjustments for better responsiveness on smaller screens */
+@media (max-width: 640px) {
+    h1 {
+        font-size: 24px;
+        padding: 25px 10px;
+    }
+
+    form {
+        padding: 20px;
+    }
 }
