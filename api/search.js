@@ -1,10 +1,12 @@
 // /api/search.js
 import fetch from 'node-fetch';
 
-console.log(req.body);
+
 
 
 export default async function(req, res) {
+
+    console.log(req.body);
 
     if (!req.body) {
         return res.status(400).json({ error: 'Request body is missing' });
