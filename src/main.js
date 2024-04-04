@@ -12,6 +12,7 @@ const __dirname = path.dirname(__filename);
 
 const app = express()
 app.use(express.static("public"));;
+
 const PORT = 3000;
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(bodyParser.json()); // Parse JSON bodies
@@ -26,6 +27,8 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '..', 'views'));
+
 
 
 app.route('/search')
