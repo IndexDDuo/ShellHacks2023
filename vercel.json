@@ -3,7 +3,7 @@
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "/src/main.js"
+        "dest": "/api/search.js"
       }
     ]
   }
