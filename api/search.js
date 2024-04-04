@@ -1,10 +1,17 @@
 // /api/search.js
 import fetch from 'node-fetch';
 
-export default async function(req, res) {
-    const { title, fieldOffices, race, weight, age } = req.body;
-    const cleanFieldOffices = fieldOffices.toLowerCase().replace(/\s/g, ''); // Update the variable
+console.log(req.body);
 
+
+export default async function(req, res) {
+
+    if (!req.body) {
+        return res.status(400).json({ error: 'Request body is missing' });
+    }
+
+    const { title, fieldOffices, race, weight, age } = req.body;
+    const cleanFieldOffices = fieldOffices ? fieldOffices.toLowerCase().replace(/\s/g, '') : ''; // Safely handle potentially undefined fieldOffices
     // Construct the FBI API URL with the specified search parameters
     const apiUrl = `https://api.fbi.gov/@wanted?pageSize=2000&page=1&sort_on=modified&sort_order=desc&title=${title}&field_offices=${cleanFieldOffices}&weight=${weight}&age_min=${age}&age_max=${age}&race=${race}`;
 
