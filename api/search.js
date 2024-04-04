@@ -8,6 +8,8 @@ export default async function(req, res) {
 
     console.log(req.body);
     console.log(req.headers);
+    console.log(JSON.stringify(req.body, null, 2));
+
 
 
     if (!req.body) {
