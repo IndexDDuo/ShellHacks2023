@@ -1,90 +1,47 @@
-import fetch from 'node-fetch';
+// Import necessary modules
 import express from 'express';
 import bodyParser from 'body-parser';
-import ejs  from 'ejs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+// Additional imports as necessary
 
+// Create the Express app
+const app = express();
 
-// Get the directory name of the current module
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// Use bodyParser middleware to parse JSON bodies
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-const app = express()
-app.use(express.static("public"));;
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
 
-const PORT = 3001;
-app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
-app.use(bodyParser.json()); // Parse JSON bodies
+// Define a POST route for '/api/search'
+app.post('/api/search', async (req, res) => {
+    // Assuming 'req.body' might be missing or empty, add a check
+    if (!req.body || Object.keys(req.body).length === 0) {
+        return res.status(400).json({ error: 'Request body is missing' });
+    }
 
-// const basket = "https://api.fbi.gov/wanted/v1/list/";
+    // Your API logic here, for example:
+    const { title, fieldOffices, race, weight, age } = req.body;
+    // Fetch from an external API, process data, etc.
 
-app.listen(PORT, () => {
-  console.log(`The server is running on port ${PORT}.`);
+    // Send a JSON response with the results
+    res.json({ results: 'Your search results' });
 });
 
-app.use(express.static("public"));
-app.use(bodyParser.json());
-
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '..', 'views'));
-
-
-
-app.route('/search')
-  .get((req, res) => {
-    // Render the search form
-    res.sendFile(path.join(__dirname, 'index.html'));
-  })
-  .post(async (req, res) => {
-    const title = req.body.title;
-    let fieldOffices = req.body.fieldOffices; // Store it in a variable
-    fieldOffices = fieldOffices.toLowerCase().replace(/\s/g, ''); // Update the variable
-    const race = req.body.race;
-    const weight = req.body.weight;
-    const age = req.body.age;
-    console.log("Form Data city:", fieldOffices); // Use the updated variable
-
-    // Construct the FBI API URL with the specified search parameters
-    const apiUrl = `https://api.fbi.gov/@wanted?pageSize=2000&page=1&sort_on=modified&sort_order=desc&title=${title}&field_offices=${fieldOffices}&weight=${weight}&age_min=${age}&age_max=${age}&race=${race}`;
-
-    console.log("Constructed API URL:", apiUrl);
-    console.log("Form Data2:", req.body.race); // Log the form data
-
-    try {
-      // Fetch data from the FBI API
-      const fetchData = await fetch(apiUrl, {
-        headers: {
-          'User-Agent': 'Your User Agent String', // Replace with your actual User-Agent
-        },
-      });
-
-      if (fetchData.ok) {
-        const gData = await fetchData.json();
-
-        // if (gData) {
-        //   console.log(gData.items);
-        // }
-
-        // Check if there are search results to render
-        if (gData && gData.items && gData.items.length > 0) {
-          // Render the results page with search results data
-          res.render('search-results', { results: gData.items });
-        } else {
-          // No search results found
-          res.status(404).send('No search results found.');
-        }
-      } else {
-        console.error(`Error fetching data: ${fetchData.status} - ${fetchData.statusText}`);
-        res.status(fetchData.status).json({ error: 'Failed to fetch data' });
-      }
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Internal server error' });
-    }
-  });
-
-  app.get('*', (req, res) => {
+// Optionally, explicitly serve 'index.html' for the root route
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
-  });
-  
+});
+
+// Fallback route for handling 404 (Not Found)
+// This should be the last route
+app.use((req, res) => {
+    res.status(404).send('404: Page Not Found');
+});
+
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
