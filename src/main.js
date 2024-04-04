@@ -13,7 +13,7 @@ const __dirname = path.dirname(__filename);
 const app = express()
 app.use(express.static("public"));;
 
-const PORT = 3000;
+const PORT = 3001;
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded bodies
 app.use(bodyParser.json()); // Parse JSON bodies
 
