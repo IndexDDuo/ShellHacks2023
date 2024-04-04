@@ -5,10 +5,12 @@
   "description": "ShellHackProject",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node api/search.js",
-    "dev": "nodemon api/search.js",
-    "build": "echo \"No build step required\""
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "dev": "vercel dev",
+      "build": "echo \"No build step required\""
+    }
+    
   },
   "repository": {
     "type": "git",
