@@ -31,7 +31,7 @@ app.set('views', path.join(__dirname, '..', 'views'));
 
 
 
-app.route('/search')
+app.route('/api/search')
   .get((req, res) => {
     // Render the search form
     res.sendFile(path.join(__dirname, 'index.html'));
