@@ -4,7 +4,7 @@ export default async (req, res) => {
   if (req.method === 'POST') {
     const { title, fieldOffices, race, weight, age } = req.body;
     const formattedFieldOffices = fieldOffices.toLowerCase().replace(/\s/g, '');
-    const apiUrl = `https://api.fbi.gov/@wanted?pageSize=991&page=1&sort_on=modified&sort_order=desc&title=${title}&field_offices=${formattedFieldOffices}&weight=${weight}&age_min=${age}&age_max=${age}&race=${race}`;
+    const apiUrl = `https://api.fbi.gov/@wanted?pageSize=991&page=2&sort_on=modified&sort_order=desc&title=${title}&field_offices=${formattedFieldOffices}&weight=${weight}&age_min=${age}&age_max=${age}&race=${race}`;
 
     try {
       const fetchData = await fetch(apiUrl, { headers: { 'User-Agent': 'Your User Agent String' } });
