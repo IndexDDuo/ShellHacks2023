@@ -18,18 +18,6 @@ This project is a simple web application that allows users to search for FBI's m
 - **API**: FBI Wanted API
 - **Language**: JavaScript
 
-## Project Structure
-
-/project-root
-/api
-- search.js # Serverless function for handling search requests
-/public
-- index.html # Main entry point for the application
-- style.css # Stylesheet for the application
-vercel.json # Configuration file for Vercel deployment
-README.md # This README file
-
-
 ## Setup and Deployment
 
 ### Prerequisites
